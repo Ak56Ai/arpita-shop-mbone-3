@@ -6,19 +6,57 @@ export const PAYMENT_PROCESSOR_ADDRESS = "0x098765432109876543210987654321098765
 
 // Contract ABIs
 export const ERC20_ABI = [
-  "function approve(address spender, uint256 amount) external returns (bool)",
-  "function allowance(address owner, address spender) external view returns (uint256)",
-  "function balanceOf(address account) external view returns (uint256)",
-  "function decimals() external view returns (uint8)",
-  "function symbol() external view returns (string)",
-  "function name() external view returns (string)"
+  {
+    "inputs": [
+      { "name": "spender", "type": "address" },
+      { "name": "amount", "type": "uint256" }
+    ],
+    "name": "approve",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "owner", "type": "address" },
+      { "name": "spender", "type": "address" }
+    ],
+    "name": "allowance",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "name": "account", "type": "address" }],
+    "name": "balanceOf",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
 ] as const
 
 export const PROCESSOR_ABI = [
-  "function payOrder(bytes32 orderId, string invoiceId) external",
-  "function createOrder(bytes32 orderId, uint256 amount, address buyer) external",
-  "event OrderPaid(bytes32 indexed orderId, address indexed buyer, uint256 amount, string invoiceId)",
-  "event OrderCreated(bytes32 indexed orderId, uint256 amount, address buyer)"
+  {
+    "inputs": [
+      { "name": "orderId", "type": "bytes32" },
+      { "name": "invoiceId", "type": "string" }
+    ],
+    "name": "payOrder",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "name": "orderId", "type": "bytes32" },
+      { "name": "amount", "type": "uint256" },
+      { "name": "buyer", "type": "address" }
+    ],
+    "name": "createOrder",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
 ] as const
 
 // Convert USD to MBONE amount (with 18 decimals) using dynamic price
